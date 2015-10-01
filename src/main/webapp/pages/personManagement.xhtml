@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<ui:composition template="/pages/templates/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="headContent">
+		<title>
+			<h:outputText value="Spring Hibernate JSF"/>
+		</title>		
+	</ui:define>
+	
+	<ui:define name="content">
+	
+		<h:form id="baseForm">
+			<div align="center">
+				
+				<h:panelGrid id="createGrid" columns="3">
+					<h:outputText value="First Name"/>
+					<p:inputText id="firstNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.firstName}"/>
+					<p:message for="firstNameInput"/>
+					
+					<h:outputText value="Last Name"/>
+					<p:inputText id="lastNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.lastName}"/>
+					<p:message for="lastNameInput"/>
+					
+					<h:outputText value="Role"/>
+					<p:selectOneMenu id="roleInput" value="#{personController.personBean.roleId}" required="true" requiredMessage="Required field">
+						<f:selectItem itemLabel="--Select Role--"/>
+						<f:selectItems value="#{personController.roles}"/>
+					</p:selectOneMenu>
+					<p:message for="roleInput"/>
+
+					<p:commandButton value="#{empty personController.personBean.id ? 'Create' : 'Update'}"
+									 actionListener="#{personController.onCreateOrUpdate}"
+									 process="createGrid"
+									 update=":baseForm:createGrid :baseForm:personsGroup"/>
+
+				</h:panelGrid>
+
+				<br/>
+				<br/>
+
+				<h:panelGroup id="personsGroup">
+					<p:dataTable value="#{personController.persons}"
+								 var="person">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="First Name"/>
+							</f:facet>
+							<h:outputText value="#{person.firstName}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Last Name"/>
+							</f:facet>
+							<h:outputText value="#{person.lastName}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Edit"/>
+							</f:facet>
+							<p:commandLink value="edit"
+										   process="@this"
+										   update=":baseForm:createGrid"
+										   action="#{personController.onEdit(person)}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Delete"/>
+							</f:facet>
+							<p:commandLink value="delete"
+										   process="@this"
+										   update=":baseForm:personsGroup"
+										   action="#{personController.onDelete(person)}"/>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+
+				
+			</div>
+			
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

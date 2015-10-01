@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<h:graphicImage styleClass="bg" value="/css/images/bg_img.png" />
+    
+    <h:panelGroup layout="block" class="top-border" />
+    
+	<header class="header_top">
+    	<h:panelGroup layout="block" class="container fludi">
+        	<h:panelGroup layout="block" class="row">
+            	<h:panelGroup layout="block" class="col-md-6 main_logo logo">
+            		<h:graphicImage value="/css/images/logo.png" />
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="col-md-6 user">
+                  	<h:panelGroup layout="block" class="user_info">
+                    	<h:panelGroup layout="block" class="user_nm">
+                        	<a href="">
+                            	<h:panelGroup layout="block" class="img_circle">
+                                    <h:panelGroup layout="block" class="">
+                                    	<h:graphicImage value="/css/images/profile_img.png" />
+                                    </h:panelGroup>
+                                    <h3>Ramon</h3>
+                                    
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" class="dropdown_arrow">
+                                	<h:graphicImage value="/css/images/down_arrow1.png" />
+                                </h:panelGroup>                                
+                            </a>
+                    	</h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="notification">
+                       <a href=""><h:graphicImage value="/css/images/notification.png" />
+                       <span>3</span></a>                        
+                    </h:panelGroup>
+                 </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+    </header> 
+	
+</ui:composition>

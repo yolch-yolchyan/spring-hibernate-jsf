@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd"
+    default-lazy-init="false">
+    
+	<!--
+		The following defines the data source.
+		There are some keys (database.dirver.classname, ...) that need to be defined in the local filter file.
+	-->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+	
+	<!-- Define here the hibernate session factory and transaction manager you may need in your application -->
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF8</prop>
+                <prop key="hibernate.jdbc.batch_size">30</prop> 
+                <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>                
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>                               
+                <prop key="show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+			</props>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedPackages">
+			<list>
+				<!-- Define here the package names that have annotated classes -->				
+				<value>com.yolchyan.exam.persistence.domain</value>
+			</list>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.yolchyan.exam.persistence.domain.BaseDomain</value>	
+				<value>com.yolchyan.exam.persistence.domain.Role</value>
+				<value>com.yolchyan.exam.persistence.domain.Person</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- transaction manager -->
+
+	<bean id="transactionManager"
+		  class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	 <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

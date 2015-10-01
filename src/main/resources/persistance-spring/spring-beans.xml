@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-lazy-init="true"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="genericDao" class="com.yolchyan.exam.persistence.dao.impl.GenericDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<bean id="personDao" class="com.yolchyan.exam.persistence.dao.impl.PersonDaoImpl" parent="genericDao"/>
+
+	<bean id="personService" class="com.yolchyan.exam.persistence.service.impl.PersonServiceImpl">
+		<property name="personDao" ref="personDao"/>
+	</bean>
+
+	<bean id="personController" class="com.yolchyan.exam.front.controller.PersonController"
+		  scope="session" init-method="init">
+		<property name="personService" ref="personService"/>
+	</bean>
+
+	<!-- This bean for configuring propery files -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>WEB-INF/application.properties</value>
+		</property>
+	</bean>
+
+</beans>
