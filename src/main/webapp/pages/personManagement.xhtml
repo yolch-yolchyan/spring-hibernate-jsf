@@ -19,20 +19,21 @@
 				
 				<h:panelGrid id="createGrid" columns="3">
 					<h:outputText value="First Name"/>
-					<p:inputText id="firstNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.firstName}"/>
+					<p:inputText style="width: 180px;" id="firstNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.firstName}"/>
 					<p:message for="firstNameInput"/>
 					
 					<h:outputText value="Last Name"/>
-					<p:inputText id="lastNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.lastName}"/>
+					<p:inputText style="width: 180px;" id="lastNameInput" required="true" requiredMessage="Required Field" value="#{personController.personBean.lastName}"/>
 					<p:message for="lastNameInput"/>
 					
 					<h:outputText value="Role"/>
-					<p:selectOneMenu id="roleInput" value="#{personController.personBean.roleId}" required="true" requiredMessage="Required field">
+					<p:selectOneMenu style="width: 180px;" id="roleInput" value="#{personController.personBean.roleId}" required="true" requiredMessage="Required field">
 						<f:selectItem itemLabel="--Select Role--"/>
 						<f:selectItems value="#{personController.roles}"/>
 					</p:selectOneMenu>
 					<p:message for="roleInput"/>
 
+					<h:outputText/>
 					<p:commandButton value="#{empty personController.personBean.id ? 'Create' : 'Update'}"
 									 actionListener="#{personController.onCreateOrUpdate}"
 									 process="createGrid"
@@ -79,7 +80,6 @@
 					</p:dataTable>
 				</h:panelGroup>
 
-				
 			</div>
 			
 		</h:form>
