@@ -3,8 +3,8 @@
 1. Application compiled with Java 8
 2. Spring Version is 4
 3. Application can be depolyed on tomcat
-4. Hibernate version 4.1
-5 JSF version 2.2.4
+4. Hibernate version is 4.1.0
+5. JSF version is 2.2.8
 
 # Description
 This simple application for presentation how could be built spring hibernate and spring jsf.
