@@ -85,10 +85,6 @@
 				</excludes>
 			</resource>
 			<resource>
-				<directory>src/main/resources/spring-core</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
 				<directory>src/main/resources/persistance-spring</directory>
 				<filtering>true</filtering>
 			</resource>
@@ -288,7 +284,7 @@
     		<artifactId>javax.faces</artifactId>
     		<version>2.1.3</version>
     		<scope>compile</scope>
-		</dependency>	
+		</dependency>
 
 		<!-- logging - SLF4J Framework with Log4J -->
 		<dependency>

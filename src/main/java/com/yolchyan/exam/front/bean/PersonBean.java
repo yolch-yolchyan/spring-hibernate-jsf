@@ -28,7 +28,7 @@ public class PersonBean implements Serializable {
 	
 	private String lastName;
 
-	// we could have other bean class for role, but for this simple app this is best solution
+	// we could have other bean class for role, but for this simple app this is the best solution
 	private Long roleId;
 
 	private String roleName;
